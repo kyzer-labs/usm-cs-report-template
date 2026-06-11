@@ -2,6 +2,22 @@
 
 Use this repository as the source of truth for USM School of Computer Sciences LaTeX report templates.
 
+## Installing The Codex Skill
+
+If the goal is to make this template automatically discoverable by Codex on the local machine, install the bundled skill:
+
+```powershell
+.\scripts\install-skill.ps1
+```
+
+The script copies `skills/cs-assignment-report-template/` into:
+
+```text
+%USERPROFILE%\.agents\skills\cs-assignment-report-template
+```
+
+After installation, use a new Codex session so the skill list can refresh. If installing the skill is not appropriate, continue using this repository directly via the workflow below.
+
 ## Default Workflow
 
 1. Copy `template/report-template.tex` to the target assignment folder as `report.tex`.
@@ -13,6 +29,12 @@ Use this repository as the source of truth for USM School of Computer Sciences L
 7. Compile and verify the PDF after edits.
 
 ## Preferred Commands
+
+Install the Codex skill globally:
+
+```powershell
+.\scripts\install-skill.ps1
+```
 
 Create a report copy:
 

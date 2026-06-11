@@ -12,6 +12,13 @@ The template is designed for CS assignments that usually need:
 
 ## Quick Start
 
+Clone the repository:
+
+```powershell
+git clone https://github.com/kyzer-labs/usm-cs-report-template.git
+cd usm-cs-report-template
+```
+
 Copy the template into an assignment folder:
 
 ```powershell
@@ -27,6 +34,34 @@ Assignment/
 ```
 
 Then edit the metadata commands near the top of `report.tex`.
+
+## Install For Codex Agents
+
+To make the bundled Codex skill available globally on a Windows machine:
+
+```powershell
+.\scripts\install-skill.ps1
+```
+
+This installs the skill to:
+
+```text
+%USERPROFILE%\.agents\skills\cs-assignment-report-template
+```
+
+After installation, start a new Codex session. Future sessions should be able to infer the skill from requests like:
+
+```text
+Create a LaTeX report for my CS assignment.
+```
+
+Or invoke it explicitly:
+
+```text
+Use $cs-assignment-report-template to start a report.
+```
+
+For non-Codex agents, use `AGENTS.md` and the `template/` folder directly.
 
 ## Compile
 
@@ -66,6 +101,7 @@ examples/
   preview-numbered-references.png
 
 scripts/
+  install-skill.ps1
   new-report.ps1
   compile-template.ps1
 
