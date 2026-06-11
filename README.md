@@ -37,7 +37,33 @@ Then edit the metadata commands near the top of `report.tex`.
 
 ## Install For Codex Agents
 
-To make the bundled Codex skill available globally on a Windows machine:
+Because this repository is public, the fastest install path is the open `skills` npm package.
+
+Install the skill for Codex in the current project:
+
+```powershell
+npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill cs-assignment-report-template --agent codex --copy -y
+```
+
+Install it globally through the same package:
+
+```powershell
+npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill cs-assignment-report-template --agent codex --global --copy -y
+```
+
+List the skills discovered from this repository without installing:
+
+```powershell
+npx skills add https://github.com/kyzer-labs/usm-cs-report-template --list
+```
+
+Requirements for the `npx` flow:
+
+- Node.js/npm must be installed.
+- The machine must be able to access GitHub.
+- Restart Codex if the installed skill does not appear immediately.
+
+For a Codex App global install on Windows, this repository also includes a local installer that copies the bundled skill to the user-level `.agents` folder:
 
 ```powershell
 .\scripts\install-skill.ps1

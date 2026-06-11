@@ -4,7 +4,29 @@ Use this repository as the source of truth for USM School of Computer Sciences L
 
 ## Installing The Codex Skill
 
-If the goal is to make this template automatically discoverable by Codex on the local machine, install the bundled skill:
+This repository is public, so agents can use the open `skills` npm package to install the bundled skill directly from GitHub.
+
+For a project-scoped Codex install:
+
+```powershell
+npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill cs-assignment-report-template --agent codex --copy -y
+```
+
+For a global Codex install through the same package:
+
+```powershell
+npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill cs-assignment-report-template --agent codex --global --copy -y
+```
+
+To inspect the discovered skills without installing:
+
+```powershell
+npx skills add https://github.com/kyzer-labs/usm-cs-report-template --list
+```
+
+Requirements: Node.js/npm must be available and GitHub must be reachable.
+
+For a Codex App global install on Windows, the repository also includes a local installer:
 
 ```powershell
 .\scripts\install-skill.ps1
@@ -30,7 +52,13 @@ After installation, use a new Codex session so the skill list can refresh. If in
 
 ## Preferred Commands
 
-Install the Codex skill globally:
+Install the Codex skill with `npx skills`:
+
+```powershell
+npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill cs-assignment-report-template --agent codex --copy -y
+```
+
+Install the Codex skill globally with the local Windows installer:
 
 ```powershell
 .\scripts\install-skill.ps1
