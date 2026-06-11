@@ -1,0 +1,303 @@
+% CS Assignment Report Template
+% Copy this file into a course project and edit the metadata commands below.
+
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{tocloft}
+\usepackage[hidelinks]{hyperref}
+
+% ---------- Report metadata ----------
+\newcommand{\university}{Universiti Sains Malaysia}
+\newcommand{\school}{School of Computer Sciences}
+\newcommand{\coursecode}{COURSE-CODE}
+\newcommand{\coursetitle}{Course Title}
+\newcommand{\academicsession}{Semester X, Academic Session YYYY/YYYY}
+\newcommand{\assignmenttitle}{Assignment Title}
+\newcommand{\reporttopic}{Report Topic Title}
+\newcommand{\studentname}{Student Name}
+\newcommand{\studentid}{MATRIC-NO}
+\newcommand{\groupname}{Group Name}
+\newcommand{\lecturername}{Lecturer Name}
+\newcommand{\submissiondate}{\today}
+\newcommand{\coverlogofile}{cover-logo-strip.png}
+
+% Add or remove rows as needed.
+\newcommand{\membertable}{
+  \begin{tabular}{>{\centering\arraybackslash}p{0.45\textwidth}
+                  >{\centering\arraybackslash}p{0.28\textwidth}}
+    \toprule
+    Name & Matric No. \\
+    \midrule
+    Student Name 1 & MATRIC-NO-1 \\
+    Student Name 2 & MATRIC-NO-2 \\
+    \bottomrule
+  \end{tabular}
+}
+
+% ---------- Page style ----------
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\coursecode}
+\rhead{\assignmenttitle}
+\cfoot{\thepage}
+\setlength{\headheight}{15pt}
+
+\setlist[itemize]{topsep=4pt,itemsep=2pt}
+\setlist[enumerate]{topsep=4pt,itemsep=2pt}
+
+% Top-level sections are numbered as 1.0, 2.0, 3.0.
+% Subsections remain 1.1, 1.2, etc.
+\renewcommand{\thesection}{\arabic{section}.0}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\renewcommand{\contentsname}{Table of Contents}
+\setlength{\cftsecnumwidth}{3.0em}
+\setlength{\cftsubsecnumwidth}{3.2em}
+
+% ---------- Code listing style ----------
+\definecolor{codegray}{RGB}{245,245,245}
+\definecolor{commentgreen}{RGB}{63,127,95}
+\definecolor{keywordblue}{RGB}{0,92,175}
+
+\lstdefinestyle{csreport}{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{commentgreen},
+  frame=single,
+  keepspaces=true,
+  keywordstyle=\color{keywordblue}\bfseries,
+  numbers=left,
+  numbersep=8pt,
+  numberstyle=\tiny\color{gray},
+  showstringspaces=false,
+  tabsize=2
+}
+\lstset{style=csreport}
+
+% ---------- Reference style ----------
+% Default: IEEE-style numbered references. Use \cite{sourceKey} in the text;
+% citations render as [1], [2], etc. References should be listed in citation
+% order. If the assignment brief states a required citation style, follow the
+% brief instead. References are a numbered final section in the Table of
+% Contents, such as 9.0 References.
+\makeatletter
+\renewenvironment{thebibliography}[1]
+  {\section{\refname}%
+   \list{\@biblabel{\@arabic\c@enumiv}}%
+        {\settowidth\labelwidth{\@biblabel{#1}}%
+         \leftmargin\labelwidth
+         \advance\leftmargin\labelsep
+         \@openbib@code
+         \usecounter{enumiv}%
+         \let\p@enumiv\@empty
+         \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+   \sloppy
+   \clubpenalty4000
+   \@clubpenalty \clubpenalty
+   \widowpenalty4000%
+   \sfcode`\.\@m}
+  {\def\@noitemerr
+    {\@latex@warning{Empty `thebibliography' environment}}%
+   \endlist}
+\makeatother
+
+\newcommand{\coverlogos}{
+  \IfFileExists{\coverlogofile}{
+    \includegraphics[width=0.90\textwidth]{\coverlogofile}
+  }{
+    \fbox{
+      \begin{minipage}{0.78\textwidth}
+        \centering\small
+        USM \quad APEX \quad \school
+      \end{minipage}
+    }
+  }
+}
+
+\begin{document}
+
+% ---------- Cover page ----------
+\begin{titlepage}
+  \centering
+  \vspace*{0.25cm}
+  \coverlogos\par
+
+  \vspace{1.15cm}
+  {\bfseries \MakeUppercase{\school}\par}
+  \vspace{0.2cm}
+  {\bfseries \MakeUppercase{\university}\par}
+
+  \vspace{1.35cm}
+  {\bfseries \coursecode{} - \coursetitle\par}
+  \vspace{0.35cm}
+  {\academicsession\par}
+
+  \vspace{1.05cm}
+  {\bfseries \assignmenttitle\par}
+  \vspace{0.3cm}
+  {\bfseries \reporttopic\par}
+
+  \vspace{1.15cm}
+  {\bfseries Lecturer: \lecturername\par}
+
+  \vspace{0.95cm}
+  \membertable
+
+  \vspace{1.0cm}
+  {\bfseries Submission Date: \submissiondate\par}
+
+  \vfill
+\end{titlepage}
+
+% ---------- Table of contents ----------
+\pagenumbering{roman}
+\tableofcontents
+\vspace{0.75cm}
+\noindent\textit{The sections listed in this template are only a reference structure. Adjust, rename, add, or remove sections according to the assignment brief and lecturer requirements. Keep References as the final item in the Table of Contents unless the brief states otherwise.}
+\clearpage
+\pagenumbering{arabic}
+
+\section{Introduction}
+
+Briefly describe the assignment, the problem being solved, and the overall approach. Cite external sources using IEEE-style numbered citations such as \cite{cormen}. A good introduction usually answers:
+
+\begin{itemize}
+  \item What is the assignment about?
+  \item What problem or scenario is being addressed?
+  \item What are the main methods, algorithms, or tools used?
+\end{itemize}
+
+\section{Objectives}
+
+State the goals of the assignment clearly. For example:
+
+\begin{enumerate}
+  \item Implement the required algorithm or system component.
+  \item Analyze correctness, performance, or usability.
+  \item Evaluate the output using suitable test cases or examples.
+\end{enumerate}
+
+\section{Background}
+
+Summarize the key concepts, theories, data structures, algorithms, or technologies needed to understand the work. Keep this section focused on concepts directly used in the assignment.
+
+\section{Methodology}
+
+Explain the approach step by step. For algorithmic assignments, include the high-level design, assumptions, input/output format, and complexity considerations.
+
+\subsection{System or Algorithm Design}
+
+Describe the design using text, diagrams, tables, or pseudocode.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Example table format}
+  \label{tab:component-summary}
+  \begin{tabular}{lll}
+    \toprule
+    Component & Purpose & Notes \\
+    \midrule
+    Input parser & Reads input data & Validate edge cases \\
+    Solver & Runs main algorithm & Analyze complexity \\
+    Output formatter & Displays result & Keep format consistent \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Pseudocode}
+
+\begin{algorithm}[htbp]
+  \caption{Process Input Data}
+  \label{alg:process-input-data}
+  \begin{algorithmic}[1]
+    \Procedure{Solve}{$inputData$}
+      \State $result \gets [\ ]$
+      \ForAll{$item \in inputData$}
+        \State append $\Call{Process}{item}$ to $result$
+      \EndFor
+      \State \Return $result$
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+\section{Implementation}
+
+Describe the implementation details that matter for understanding the work. Avoid pasting every line of source code unless the assignment requires it. Focus on important functions, modules, decisions, and edge cases.
+
+\subsection{Important Code Fragment}
+
+\begin{lstlisting}[language=Python,caption={Replace with a relevant code fragment},label={lst:process-item}]
+def process(item):
+    if item is None:
+        return "invalid"
+    return str(item).strip()
+\end{lstlisting}
+
+\section{Testing and Results}
+
+Explain how the solution was tested. Include meaningful cases such as normal inputs, boundary cases, invalid inputs, and larger examples.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Example test cases}
+  \label{tab:test-cases}
+  \begin{tabular}{llll}
+    \toprule
+    Test case & Input summary & Expected result & Actual result \\
+    \midrule
+    TC1 & Basic valid input & Correct output & Correct output \\
+    TC2 & Empty input & Graceful handling & Graceful handling \\
+    TC3 & Large input & Completes successfully & Completes successfully \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% To include a figure, place the image file in the same folder and uncomment:
+% \begin{figure}[htbp]
+%   \centering
+%   \includegraphics[width=0.75\textwidth]{example-image.png}
+%   \caption{Replace with a useful screenshot or diagram caption}
+%   \label{fig:example-diagram}
+% \end{figure}
+
+\section{Discussion}
+
+Discuss the results. Mention what worked well, limitations, trade-offs, and any assumptions that affected the outcome.
+
+\section{Conclusion}
+
+Summarize the work completed, the main findings, and what could be improved in future work.
+
+\clearpage
+% References should remain the final numbered section unless the assignment
+% brief requires appendices or declarations after it.
+\begin{thebibliography}{9}
+
+\bibitem{cormen}
+T. H. Cormen, C. E. Leiserson, R. L. Rivest, and C. Stein,
+\textit{Introduction to Algorithms}, 3rd ed.
+Cambridge, MA, USA: MIT Press, 2009.
+
+\bibitem{overleaf}
+Overleaf, "LaTeX documentation." [Online].
+Available: \url{https://www.overleaf.com/learn}.
+[Accessed: Jun. 12, 2026].
+
+\end{thebibliography}
+
+\end{document}

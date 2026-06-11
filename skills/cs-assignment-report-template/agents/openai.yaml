@@ -1,0 +1,8 @@
+interface:
+  display_name: "CS Assignment Report Template"
+  short_description: "Reusable LaTeX template for CS coursework reports"
+  brand_color: "#2563EB"
+  default_prompt: "Use $cs-assignment-report-template to start a LaTeX assignment report for my course project."
+
+policy:
+  allow_implicit_invocation: true
