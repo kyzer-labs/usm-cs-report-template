@@ -1,0 +1,40 @@
+{
+  "name": "usm-cs-report-template",
+  "version": "0.2.0",
+  "description": "USM CS LaTeX report template with bundled agent skills for report creation, compilation, diagnostics, and runtime setup.",
+  "author": {
+    "name": "Kyzer Labs",
+    "url": "https://github.com/kyzer-labs"
+  },
+  "homepage": "https://github.com/kyzer-labs/usm-cs-report-template",
+  "repository": "https://github.com/kyzer-labs/usm-cs-report-template",
+  "keywords": [
+    "latex",
+    "report",
+    "coursework",
+    "usm",
+    "skills",
+    "tectonic"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "USM CS Report Template",
+    "shortDescription": "LaTeX report template with compile support",
+    "longDescription": "Create USM School of Computer Sciences coursework reports from a reusable LaTeX template, then use bundled support skills to diagnose, compile, or bootstrap LaTeX support on agent machines.",
+    "developerName": "Kyzer Labs",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/kyzer-labs/usm-cs-report-template",
+    "defaultPrompt": [
+      "Create a USM CS LaTeX assignment report.",
+      "Compile this LaTeX report and fix errors.",
+      "Check whether this machine can build LaTeX PDFs."
+    ],
+    "brandColor": "#2563EB",
+    "screenshots": []
+  }
+}

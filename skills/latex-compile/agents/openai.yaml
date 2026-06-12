@@ -1,0 +1,4 @@
+interface:
+  display_name: "LaTeX Compile"
+  short_description: "Compile TeX files with portable fallbacks"
+  default_prompt: "Use $latex-compile to build this LaTeX report into a PDF."

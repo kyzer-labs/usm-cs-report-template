@@ -24,6 +24,6 @@ if ($OutputDirectory) {
     $forward.OutputDirectory = $OutputDirectory
 }
 
-& (Join-Path $PSScriptRoot "report\compile-template.ps1") @forward
+& (Join-Path $PSScriptRoot "..\..\skills\latex-compile\scripts\latex-compile.ps1") @forward
 if ($?) { exit 0 }
 exit 1

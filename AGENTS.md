@@ -1,84 +1,73 @@
 # Agent Instructions
 
-Use this repository as the source of truth for USM School of Computer Sciences LaTeX report templates.
+Use this repository as the source of truth for USM School of Computer Sciences LaTeX report templates. The report template is the primary product; the bundled LaTeX skills are support tooling for machines that do not already have Codex's LaTeX plugin.
 
-## Installing The Codex Skill
+## Skill And Plugin Shape
 
-This repository is public, so agents can use the open `skills` npm package to install the bundled skill directly from GitHub.
+- Primary skill: `skills/cs-assignment-report-template/`
+- Supporting skills: `skills/latex-doctor/`, `skills/latex-compile/`, `skills/latex-runtime-installer/`
+- Codex plugin manifest: `.codex-plugin/plugin.json`
+- No connector apps or MCP servers are required.
 
-For a project-scoped Codex install:
+## Installing Skills
 
-```powershell
-npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill cs-assignment-report-template --agent codex --copy -y
-```
-
-For a global Codex install through the same package:
-
-```powershell
-npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill cs-assignment-report-template --agent codex --global --copy -y
-```
-
-To inspect the discovered skills without installing:
-
-```powershell
-npx skills add https://github.com/kyzer-labs/usm-cs-report-template --list
-```
-
-Requirements: Node.js/npm must be available and GitHub must be reachable.
-
-For a Codex App global install on Windows, the repository also includes a local installer:
+Install all bundled skills globally for agents that read `%USERPROFILE%\.agents\skills`:
 
 ```powershell
 .\scripts\install-skill.ps1
 ```
 
-The script copies `skills/cs-assignment-report-template/` into:
+Install a single skill:
 
-```text
-%USERPROFILE%\.agents\skills\cs-assignment-report-template
+```powershell
+.\scripts\report\install-skills.ps1 -SkillName cs-assignment-report-template
+.\scripts\report\install-skills.ps1 -SkillName latex-compile
 ```
 
-After installation, use a new Codex session so the skill list can refresh. If installing the skill is not appropriate, continue using this repository directly via the workflow below.
+Install from GitHub with the open `skills` npm package:
 
-## Default Workflow
+```powershell
+npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill cs-assignment-report-template --agent codex --copy -y
+npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill latex-doctor --agent codex --copy -y
+npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill latex-compile --agent codex --copy -y
+npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill latex-runtime-installer --agent codex --copy -y
+```
 
-1. Copy `template/report-template.tex` to the target assignment folder as `report.tex`.
-2. Copy `template/cover-logo-strip.png` to the same folder.
+Start a new agent session after installing skills so the skill list can refresh.
+
+## Default Report Workflow
+
+1. Copy `templates/usm-cs-report/report-template.tex` to the target assignment folder as `report.tex`.
+2. Copy `templates/usm-cs-report/cover-logo-strip.png` to the same folder.
 3. Fill the metadata commands near the top of `report.tex` using the assignment brief.
 4. Keep the section list as a starting reference, not a rule. Rename, add, or remove sections to match the actual brief.
 5. Keep `References` as the final numbered section in the Table of Contents unless the brief requires appendices or declarations after it.
 6. Use IEEE-style numbered citations by default: `\cite{sourceKey}`.
 7. Compile and verify the PDF after edits.
 
-## Preferred Commands
-
-Install the Codex skill with `npx skills`:
-
-```powershell
-npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill cs-assignment-report-template --agent codex --copy -y
-```
-
-Install the Codex skill globally with the local Windows installer:
-
-```powershell
-.\scripts\install-skill.ps1
-```
-
-Create a report copy:
+Use the helper script for steps 1 and 2:
 
 ```powershell
 .\scripts\new-report.ps1 -Target "C:\path\to\assignment"
 ```
 
-Compile a report:
+Compile:
 
 ```powershell
 .\scripts\compile-template.ps1 -Main "C:\path\to\assignment\report.tex"
 ```
 
+Diagnose LaTeX tooling:
+
+```powershell
+.\scripts\latex\latex-doctor.ps1
+```
+
 ## Editing Notes
 
 - Do not edit generated PDFs as the source of truth.
-- Prefer changing `template/report-template.tex`, then mirror material changes into `skills/cs-assignment-report-template/assets/cs-assignment-report-template.tex`.
-- Keep the Codex skill concise. Put reusable files in `assets/`, not in long instructions.
+- Prefer changing `templates/usm-cs-report/report-template.tex`.
+- After changing the canonical template, run `.\scripts\report\sync-skill-assets.ps1`.
+- Keep skills concise. Put reusable files in `assets/` or `scripts/`, not in long instructions.
 - If the lecturer specifies a different cover, citation style, section order, or declaration page, follow the lecturer's brief.
+- Do not run runtime installers unless the user explicitly asks to install LaTeX support.

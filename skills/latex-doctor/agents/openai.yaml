@@ -1,0 +1,4 @@
+interface:
+  display_name: "LaTeX Doctor"
+  short_description: "Check local LaTeX compiler readiness"
+  default_prompt: "Use $latex-doctor to check whether this machine can compile LaTeX reports."

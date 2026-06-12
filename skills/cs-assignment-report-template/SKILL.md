@@ -14,7 +14,7 @@ Use this skill when the user asks to create a computer science assignment report
 3. Fill the metadata commands near the top of the file before editing body content.
 4. Keep the report structure simple unless the assignment brief requires otherwise: cover page, table of contents, introduction, objectives, background, methodology, implementation, testing/results, discussion, conclusion, and references. Treat References as the final listed item in the Table of Contents unless the brief requires another final item.
 5. If collaboration is needed, treat LaTeX-to-DOCX or LaTeX-to-Google-Docs conversion as a one-way handoff. After the handoff, Google Docs or DOCX should become the final source of truth.
-6. If the user asks to compile or verify the report, use the available LaTeX compile workflow and fix errors in the copied project file.
+6. If the user asks to compile or verify the report, use `latex-compile` when available. If compilation tooling is uncertain, run `latex-doctor` first, then fix errors in the copied project file.
 
 ## Reference Style
 
@@ -36,3 +36,5 @@ Template paths:
 `assets/cover-logo-strip.png`
 
 Prefer copying the asset instead of recreating it from memory.
+
+The canonical human-facing template lives at `templates/usm-cs-report/report-template.tex` in the repository. If that file changes, synchronize this skill's assets before publishing.

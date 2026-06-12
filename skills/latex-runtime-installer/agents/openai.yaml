@@ -1,0 +1,4 @@
+interface:
+  display_name: "LaTeX Runtime Installer"
+  short_description: "Bootstrap Tectonic or TeX Live safely"
+  default_prompt: "Use $latex-runtime-installer to set up a LaTeX compiler for this report."

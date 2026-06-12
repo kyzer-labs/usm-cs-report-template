@@ -13,7 +13,16 @@ param(
     [string]$TectonicPath = "tectonic"
 )
 
-$forward = @{
+$ErrorActionPreference = "Stop"
+
+$repoRoot = Resolve-Path (Join-Path $PSScriptRoot "..\..")
+$compileScript = Join-Path $repoRoot "skills\latex-compile\scripts\latex-compile.ps1"
+
+if (-not (Test-Path -LiteralPath $compileScript)) {
+    throw "Bundled LaTeX compile script not found: $compileScript"
+}
+
+$compileArgs = @{
     Main = $Main
     Compiler = $Compiler
     Engine = $Engine
@@ -21,9 +30,8 @@ $forward = @{
 }
 
 if ($OutputDirectory) {
-    $forward.OutputDirectory = $OutputDirectory
+    $compileArgs.OutputDirectory = $OutputDirectory
 }
 
-& (Join-Path $PSScriptRoot "report\compile-template.ps1") @forward
-if ($?) { exit 0 }
-exit 1
+& $compileScript @compileArgs
+exit $LASTEXITCODE
