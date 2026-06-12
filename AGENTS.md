@@ -1,13 +1,14 @@
 # Agent Instructions
 
-Use this repository as the source of truth for USM School of Computer Sciences LaTeX report templates. The report template is the primary product; the bundled LaTeX skills are support tooling for machines that do not already have Codex's LaTeX plugin.
+Use this repository as the source of truth for USM School of Computer Sciences LaTeX report templates. The report template is the primary product; the bundled LaTeX skills are portable support tooling for agents and machines that do not already have a LaTeX workflow.
 
-## Skill And Plugin Shape
+## Package Shape
 
+- Primary workflow: create and compile a USM CS LaTeX report.
 - Primary skill: `skills/cs-assignment-report-template/`
 - Supporting skills: `skills/latex-doctor/`, `skills/latex-compile/`, `skills/latex-runtime-installer/`
-- Codex plugin manifest: `.codex-plugin/plugin.json`
-- No connector apps or MCP servers are required.
+- Skill format: open Agent Skills style folders with `SKILL.md`, optional scripts, and optional assets.
+- Product-specific packaging metadata and hosted integrations are intentionally not included.
 
 ## Installing Skills
 
@@ -24,16 +25,15 @@ Install a single skill:
 .\scripts\report\install-skills.ps1 -SkillName latex-compile
 ```
 
-Install from GitHub with the open `skills` npm package:
+For other agents, copy the relevant folder under `skills/` into that agent's skill search path.
+
+Agents that support the open `skills` npm package can inspect the available skills:
 
 ```powershell
-npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill cs-assignment-report-template --agent codex --copy -y
-npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill latex-doctor --agent codex --copy -y
-npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill latex-compile --agent codex --copy -y
-npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill latex-runtime-installer --agent codex --copy -y
+npx skills add https://github.com/kyzer-labs/usm-cs-report-template --list
 ```
 
-Start a new agent session after installing skills so the skill list can refresh.
+Use the install command and target flag required by the specific agent platform.
 
 ## Default Report Workflow
 

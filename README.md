@@ -1,8 +1,8 @@
 # USM CS Report Template
 
-Reusable LaTeX report template for Universiti Sains Malaysia School of Computer Sciences coursework reports, bundled with lightweight agent skills for LaTeX diagnosis, compilation, and runtime setup.
+Reusable LaTeX report template for Universiti Sains Malaysia School of Computer Sciences coursework reports, bundled with open Agent Skills and plain PowerShell helpers for diagnosis, compilation, and runtime setup.
 
-The main purpose of this repository is still the report template. The LaTeX skills exist so agents and remote PCs can reproduce the full create-and-compile workflow even when Codex's bundled LaTeX plugin is not available.
+The main purpose of this repository is the report template. The LaTeX skills exist so agents and remote PCs can reproduce the full create-and-compile workflow without depending on a specific AI product, hosted integration, or vendor runtime.
 
 The template is designed for CS assignments that usually need:
 
@@ -69,20 +69,22 @@ If no compiler is available, inspect setup options:
 
 The installer helper is detect-first. It does not install anything unless explicitly run with an install flag.
 
-## Install For Agents
+## Agent Skills
 
-Install all bundled skills into the user-level `.agents` folder:
+The `skills/` folder follows the open Agent Skills layout: each skill is a folder with a required `SKILL.md` plus optional scripts or assets.
 
-```powershell
-.\scripts\install-skill.ps1
-```
-
-This installs:
+Bundled skills:
 
 - `cs-assignment-report-template`
 - `latex-doctor`
 - `latex-compile`
 - `latex-runtime-installer`
+
+Install all bundled skills into the common user-level `.agents` folder:
+
+```powershell
+.\scripts\install-skill.ps1
+```
 
 Install only one skill:
 
@@ -91,34 +93,22 @@ Install only one skill:
 .\scripts\report\install-skills.ps1 -SkillName latex-compile
 ```
 
-Because this repository is public, agents that support the open `skills` npm package can also install individual skills directly from GitHub:
+If your agent uses a different skill search path, copy the desired folder from `skills/` into that location. The skills do not require product-specific metadata.
 
-```powershell
-npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill cs-assignment-report-template --agent codex --copy -y
-npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill latex-doctor --agent codex --copy -y
-npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill latex-compile --agent codex --copy -y
-npx skills add https://github.com/kyzer-labs/usm-cs-report-template --skill latex-runtime-installer --agent codex --copy -y
-```
-
-List discovered skills without installing:
+Agents that support the open `skills` npm package can inspect the repository:
 
 ```powershell
 npx skills add https://github.com/kyzer-labs/usm-cs-report-template --list
 ```
 
-Restart the agent or start a new session after installing skills if they do not appear immediately.
+Use the install command and target flag required by your own agent platform.
 
-For non-Codex agents, use `AGENTS.md`, `templates/usm-cs-report/`, and the PowerShell scripts directly.
+## Design Principles
 
-## Codex Plugin Manifest
-
-This repository includes a Codex plugin manifest at:
-
-```text
-.codex-plugin/plugin.json
-```
-
-The manifest points at `./skills/` and contains no connector apps or MCP servers. It exists so the same repo can be used as a report-template skill source, a local plugin package, or a plain script/template repository.
+- Report-focused: the template is the main artifact.
+- Agent-agnostic: skills are plain `SKILL.md` folders with scripts/assets.
+- Runtime-agnostic: scripts prefer Tectonic but can use TeX Live or MiKTeX.
+- No product lock-in: no vendor manifest, hosted integration, or account-specific service is required.
 
 ## Reference Style
 
@@ -139,9 +129,6 @@ Follow the assignment brief or lecturer instructions if they specify another cit
 ## Repository Layout
 
 ```text
-.codex-plugin/
-  plugin.json
-
 templates/
   usm-cs-report/
     report-template.tex
@@ -167,9 +154,17 @@ scripts/
 
 skills/
   cs-assignment-report-template/
+    SKILL.md
+    assets/
   latex-doctor/
+    SKILL.md
+    scripts/
   latex-compile/
+    SKILL.md
+    scripts/
   latex-runtime-installer/
+    SKILL.md
+    scripts/
 ```
 
 The `templates/` folder is the canonical human-facing source. The report skill packages the same template as skill assets. Run `.\scripts\report\sync-skill-assets.ps1` after changing the canonical template.

@@ -41,9 +41,9 @@ foreach ($skill in $skills) {
 
     Copy-Item -LiteralPath $skill.FullName -Destination $targetSkill -Recurse -Force
 
-    Write-Host "Installed Codex skill:"
+    Write-Host "Installed agent skill:"
     Write-Host "  $targetSkill"
 }
 
 Write-Host ""
-Write-Host "Start a new Codex session for the refreshed skill list to be picked up."
+Write-Host "Start a new agent session for the refreshed skill list to be picked up."

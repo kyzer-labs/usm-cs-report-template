@@ -22,4 +22,4 @@ The report template itself is plain LaTeX plus image assets. The helper scripts 
 | `latex-compile` | PowerShell and one LaTeX compiler | `latexmk`, `xelatex`, `lualatex`, `biber` | Tries Tectonic first for simple reports, then falls back to full LaTeX tools. |
 | `latex-runtime-installer` | PowerShell and network access for install mode | Tectonic GitHub release access | Detect-first helper. It does not install unless explicitly requested. |
 
-No connector apps or plugin-local MCP servers are required.
+No hosted integration, vendor-specific runtime, or account-specific service is required.
