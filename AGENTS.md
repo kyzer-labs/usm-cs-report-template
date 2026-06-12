@@ -63,11 +63,18 @@ Diagnose LaTeX tooling:
 .\scripts\latex\latex-doctor.ps1
 ```
 
+Install the pinned user-level Tectonic runtime only when explicitly asked:
+
+```powershell
+.\scripts\latex\install-latex-runtime.ps1 -InstallTectonic
+```
+
 ## Editing Notes
 
 - Do not edit generated PDFs as the source of truth.
 - Prefer changing `templates/usm-cs-report/report-template.tex`.
 - After changing the canonical template, run `.\scripts\report\sync-skill-assets.ps1`.
 - Keep skills concise. Put reusable files in `assets/` or `scripts/`, not in long instructions.
+- Keep `dependencies/tectonic-runtime.json` and `skills/latex-runtime-installer/dependencies/tectonic-runtime.json` in sync when updating the pinned Tectonic runtime.
 - If the lecturer specifies a different cover, citation style, section order, or declaration page, follow the lecturer's brief.
 - Do not run runtime installers unless the user explicitly asks to install LaTeX support.

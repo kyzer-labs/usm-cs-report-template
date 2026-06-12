@@ -1,0 +1,17 @@
+{
+  "name": "tectonic",
+  "version": "0.16.9",
+  "releaseTag": "tectonic@0.16.9",
+  "repository": "https://github.com/tectonic-typesetting/tectonic",
+  "releaseUrl": "https://github.com/tectonic-typesetting/tectonic/releases/tag/tectonic%400.16.9",
+  "defaultInstallDirectory": "%LOCALAPPDATA%\\usm-cs-report-template\\bin",
+  "windows": {
+    "architecture": "x86_64",
+    "toolchain": "msvc",
+    "assetName": "tectonic-0.16.9-x86_64-pc-windows-msvc.zip",
+    "assetUrl": "https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.16.9/tectonic-0.16.9-x86_64-pc-windows-msvc.zip",
+    "sha256": "131a24604785a9600989a3d91225f597df52ac06f00aeffe86fd529f99ee5cdd",
+    "checksumStrategy": "Verify the downloaded official release archive against this pinned SHA-256 before extraction.",
+    "checksumSource": "Pinned from the official GitHub release asset because the release does not publish separate checksum assets."
+  }
+}

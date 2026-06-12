@@ -30,6 +30,7 @@ Common options:
 ## Strategy
 
 - `auto` mode uses Tectonic first for simple reports.
+- If `tectonic` is not on `PATH`, the script also checks `%LOCALAPPDATA%\usm-cs-report-template\bin\tectonic.exe`, which is where `latex-runtime-installer` places the pinned user-level runtime on Windows.
 - Projects using bibliography databases, `biber`, indexes, glossaries, `minted`, shell escape, or explicit engine directives go to TeX Live or MiKTeX tooling first.
 - TeX Live or MiKTeX builds use `latexmk` when available. Otherwise the selected engine runs twice.
 

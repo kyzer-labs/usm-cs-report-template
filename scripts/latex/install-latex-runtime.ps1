@@ -1,12 +1,13 @@
 param(
     [switch]$InstallTectonic,
     [switch]$ShowFullLatexOptions,
-    [string]$InstallDirectory = (Join-Path $env:LOCALAPPDATA "usm-cs-report-template\bin")
+    [string]$InstallDirectory,
+    [string]$RuntimeMetadataPath
 )
 
-$forward = @{
-    InstallDirectory = $InstallDirectory
-}
+$forward = @{}
+if ($InstallDirectory) { $forward.InstallDirectory = $InstallDirectory }
+if ($RuntimeMetadataPath) { $forward.RuntimeMetadataPath = $RuntimeMetadataPath }
 if ($InstallTectonic) { $forward.InstallTectonic = $true }
 if ($ShowFullLatexOptions) { $forward.ShowFullLatexOptions = $true }
 

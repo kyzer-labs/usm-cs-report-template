@@ -23,11 +23,13 @@ Use this skill only after `latex-doctor` shows that the machine cannot compile r
 .\scripts\install-latex-runtime.ps1 -InstallTectonic
 ```
 
-5. For full LaTeX distributions, do not silently install a multi-GB runtime. Explain the tradeoff and use the official installer path for TeX Live, MacTeX, or MiKTeX based on the OS.
+5. The helper installs the pinned Tectonic release declared in `dependencies/tectonic-runtime.json` and verifies the downloaded archive SHA-256 before extraction.
+6. For full LaTeX distributions, do not silently install a multi-GB runtime. Explain the tradeoff and use the official installer path for TeX Live, MacTeX, or MiKTeX based on the OS.
 
 ## Safety
 
 - Do not install anything without explicit confirmation.
 - Do not remove or overwrite an existing TeX Live, MacTeX, or MiKTeX installation.
 - Prefer user-level installs and avoid changing shell startup files.
+- Do not replace the pinned runtime metadata with a floating "latest" release.
 - After installing, run `latex-doctor`, then compile the report with `latex-compile`.

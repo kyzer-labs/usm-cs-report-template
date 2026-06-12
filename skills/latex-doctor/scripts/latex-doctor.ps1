@@ -9,18 +9,29 @@ function Get-ToolInfo {
     param([string]$Name)
 
     $command = Get-Command $Name -ErrorAction SilentlyContinue
-    if (-not $command) {
+    if ($command) {
         return [ordered]@{
             name = $Name
-            found = $false
-            path = $null
+            found = $true
+            path = $command.Source
+        }
+    }
+
+    if ($Name -eq "tectonic" -and $env:LOCALAPPDATA) {
+        $managedTectonic = Join-Path $env:LOCALAPPDATA "usm-cs-report-template\bin\tectonic.exe"
+        if (Test-Path -LiteralPath $managedTectonic) {
+            return [ordered]@{
+                name = $Name
+                found = $true
+                path = (Resolve-Path -LiteralPath $managedTectonic).Path
+            }
         }
     }
 
     return [ordered]@{
         name = $Name
-        found = $true
-        path = $command.Source
+        found = $false
+        path = $null
     }
 }
 

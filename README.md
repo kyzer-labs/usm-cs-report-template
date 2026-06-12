@@ -67,7 +67,7 @@ If no compiler is available, inspect setup options:
 .\scripts\latex\install-latex-runtime.ps1
 ```
 
-The installer helper is detect-first. It does not install anything unless explicitly run with an install flag.
+The installer helper is detect-first. It does not install anything unless explicitly run with an install flag. In install mode it downloads the pinned official Tectonic release declared in `dependencies/tectonic-runtime.json`, verifies the archive SHA-256, and places `tectonic.exe` under `%LOCALAPPDATA%\usm-cs-report-template\bin`. The compile and doctor helpers automatically check that user-level path, so editing `PATH` is optional.
 
 ## Agent Skills
 
@@ -165,6 +165,9 @@ skills/
   latex-runtime-installer/
     SKILL.md
     scripts/
+
+dependencies/
+  tectonic-runtime.json
 ```
 
 The `templates/` folder is the canonical human-facing source. The report skill packages the same template as skill assets. Run `.\scripts\report\sync-skill-assets.ps1` after changing the canonical template.

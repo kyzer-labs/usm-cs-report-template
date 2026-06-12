@@ -18,6 +18,10 @@ $ErrorActionPreference = "Stop"
 function Resolve-CommandPath {
     param([string]$CommandOrPath)
 
+    if (-not $CommandOrPath) {
+        return $null
+    }
+
     if (Test-Path -LiteralPath $CommandOrPath) {
         return (Resolve-Path -LiteralPath $CommandOrPath).Path
     }
@@ -28,6 +32,43 @@ function Resolve-CommandPath {
     }
 
     return $null
+}
+
+function Get-ManagedTectonicPath {
+    if (-not $env:LOCALAPPDATA) {
+        return $null
+    }
+
+    return (Join-Path $env:LOCALAPPDATA "usm-cs-report-template\bin\tectonic.exe")
+}
+
+function Resolve-TectonicExecutable {
+    param([string]$PreferredPath)
+
+    $candidates = @()
+    if ($PreferredPath) {
+        $candidates += $PreferredPath
+    }
+
+    $managedPath = Get-ManagedTectonicPath
+    if ($managedPath) {
+        $candidates += $managedPath
+    }
+
+    foreach ($candidate in @($candidates | Select-Object -Unique)) {
+        $resolved = Resolve-CommandPath -CommandOrPath $candidate
+        if ($resolved) {
+            return [ordered]@{
+                path = $resolved
+                tried = $candidates
+            }
+        }
+    }
+
+    return [ordered]@{
+        path = $null
+        tried = $candidates
+    }
 }
 
 function Test-RequiresFullLatex {
@@ -133,12 +174,14 @@ New-Item -ItemType Directory -Force -Path $OutputDirectory | Out-Null
 $outDirResolved = (Resolve-Path -LiteralPath $OutputDirectory).Path
 
 $needsFullLatex = Test-RequiresFullLatex -Path $mainPath
-$tectonic = Resolve-CommandPath -CommandOrPath $TectonicPath
+$tectonicResolution = Resolve-TectonicExecutable -PreferredPath $TectonicPath
+$tectonic = $tectonicResolution.path
 $expectedPdf = Join-Path $outDirResolved ([System.IO.Path]::GetFileNameWithoutExtension($mainLeaf) + ".pdf")
 
 if ($Compiler -eq "tectonic") {
     if (-not $tectonic) {
-        throw "Tectonic is not available at '$TectonicPath'."
+        $tried = ($tectonicResolution.tried | Where-Object { $_ }) -join "', '"
+        throw "Tectonic is not available. Tried '$tried'. Run the latex-runtime-installer helper with -InstallTectonic or pass -TectonicPath."
     }
     $tectonicExit = Invoke-Tectonic -Executable $tectonic -MainLeaf $mainLeaf -MainDir $mainDir -OutDir $outDirResolved
     if ($tectonicExit -eq 0 -or (Test-Path -LiteralPath $expectedPdf)) {
