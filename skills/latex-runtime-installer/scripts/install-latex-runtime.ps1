@@ -66,12 +66,12 @@ if (-not $InstallDirectory) {
 
 $managedTectonic = if ($InstallDirectory) { Get-ManagedTectonicPath -Directory $InstallDirectory } else { $null }
 
-if ((Test-CommandAvailable "tectonic") -and -not $InstallTectonic) {
+if ((Test-CommandAvailable "tectonic") -and -not $InstallTectonic -and -not $ShowFullLatexOptions) {
     Write-Host "Tectonic is already available on PATH."
     exit 0
 }
 
-if ($managedTectonic -and (Test-Path -LiteralPath $managedTectonic) -and -not $InstallTectonic) {
+if ($managedTectonic -and (Test-Path -LiteralPath $managedTectonic) -and -not $InstallTectonic -and -not $ShowFullLatexOptions) {
     Write-Host "Tectonic is already available at the user-level runtime path."
     Write-Host "  $managedTectonic"
     exit 0
